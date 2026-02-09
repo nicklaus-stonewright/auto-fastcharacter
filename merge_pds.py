@@ -2,9 +2,9 @@ import os
 from PyPDF2 import PdfMerger
 
 # Path to your folder containing PDFs
-lvl_text = "lvl9"
+lvl_text = "lvl7"
 pdf_folder = f"character_pdfs\{lvl_text}"
-output_file = os.path.join(pdf_folder, f"merged_characters_{lvl_text}_output.pdf")
+output_file = os.path.join(pdf_folder, f"merged_24characters_{lvl_text}_output.pdf")
 
 # Get all PDF files in the folder (sorted alphabetically)
 pdf_files = sorted([f for f in os.listdir(pdf_folder) if f.lower().endswith(".pdf")])
