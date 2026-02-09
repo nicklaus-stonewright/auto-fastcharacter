@@ -100,7 +100,7 @@ for level in TARGET_LEVELS:
         driver.execute_script("arguments[0].click();", submit_btn)
         
         # Save PDF
-        filename = f"character-lvl{level}-{class_value.replace(' ', '-')}.pdf"
+        filename = f"{level}/character-lvl{level}-{class_value.replace(' ', '-')}.pdf"
         save_first_page_as_pdf(driver, filename)
         print(f"Saved: {filename}")
 
