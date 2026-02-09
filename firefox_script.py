@@ -9,7 +9,7 @@ import os
 TARGET_LEVELS = ["3", "4", "5", "6", "7"] 
 ADBLOCK_PATH = "adblock_for_firefox-6.33.6.xpi" # Ensure this file is in your folder
 
-def save_first_page_as_pdf(driver, file_name):
+def save_first_page_as_pdf(driver, file_name, level):
     params = {
         "pageRanges": ["1"],
         "orientation": "portrait",
@@ -17,8 +17,8 @@ def save_first_page_as_pdf(driver, file_name):
     }
     # Direct execution to bypass version-specific PrintOptions
     pdf_data = driver.execute("printPage", {"options": params})['value']
-    
-    target_path = os.path.join(output_dir, file_name)
+    os.makedirs(os.path.join(output_dir, level), exist_ok=True)
+    target_path = os.path.join(output_dir, level, file_name)
     with open(target_path, "wb") as f:
         f.write(base64.b64decode(pdf_data))
 
@@ -100,8 +100,8 @@ for level in TARGET_LEVELS:
         driver.execute_script("arguments[0].click();", submit_btn)
         
         # Save PDF
-        filename = f"{level}/character-lvl{level}-{class_value.replace(' ', '-')}.pdf"
-        save_first_page_as_pdf(driver, filename)
+        filename = f"character-lvl{level}-{class_value.replace(' ', '-')}.pdf"
+        save_first_page_as_pdf(driver, filename, f"lvl{level}")
         print(f"Saved: {filename}")
 
         # Memory Cleanup
